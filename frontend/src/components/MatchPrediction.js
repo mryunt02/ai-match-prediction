@@ -53,68 +53,42 @@ const MatchPrediction = () => {
           Timed
         </button>
       </div>
-      <div className='matches-container'>
-        {filteredMatches && filteredMatches.length > 0 ? (
-          filteredMatches.map((match, index) => (
-            <div key={index} className='match-card'>
-              <p>{match.competition.name}</p>
-              <div className='match-info'>
-                <h2>{match.homeTeam.name}</h2>
+      {filteredMatches && filteredMatches.length > 0 ? (
+        filteredMatches.map((match, index) => (
+          <div key={index} className='match-card'>
+            <h2>{match.competition.name}</h2>
+            <p>{new Date(match.utcDate).toLocaleString()}</p>
+            <div className='match-content'>
+              <div className='team home'>
+                <span className='team-name'>{match.homeTeam.name}</span>
                 <img
                   src={match.homeTeam.crest}
                   alt={match.homeTeam.name}
-                  width={90}
-                  height={90}
+                  className='team-logo'
                 />
-                <div className='match-header'>
-                  <p>{new Date(match.utcDate).toLocaleString()}</p>
-                  {match.score.fullTime.home} - {match.score.fullTime.away}
-                  <p>FT</p>
-                </div>
+              </div>
 
+              <div className='score-container'>
+                <div className='score'>
+                  {match.score.fullTime.home} - {match.score.fullTime.away}
+                </div>
+                <div className='match-status'>{match.status}</div>
+              </div>
+
+              <div className='team away'>
                 <img
                   src={match.awayTeam.crest}
                   alt={match.awayTeam.name}
-                  width={90}
-                  height={90}
+                  className='team-logo'
                 />
-                <h2>{match.awayTeam.name}</h2>
-              </div>
-              <div className='teams'>
-                <div className='team home'>
-                  <img
-                    src={match.homeTeam.crest}
-                    alt={match.homeTeam.name}
-                    className='team-crest'
-                  />
-                  <span>{match.homeTeam.name}</span>
-                </div>
-                <div className='score'>
-                  <p>{`Half Time: ${match.score.halfTime.home} - ${match.score.halfTime.away}`}</p>
-                </div>
-                <div className='team away'>
-                  <img
-                    src={match.awayTeam.crest}
-                    alt={match.awayTeam.name}
-                    className='team-crest'
-                  />
-                  <span>{match.awayTeam.name}</span>
-                </div>
-              </div>
-              <div className='match-footer'>
-                <p>{`Location: ${match.area.name}`}</p>
-                <img
-                  src={match.area.flag}
-                  alt={`${match.area.name} flag`}
-                  className='flag'
-                />
+                <span className='team-name'>{match.awayTeam.name}</span>
               </div>
             </div>
-          ))
-        ) : (
-          <p>No matches available.</p>
-        )}
-      </div>
+          </div>
+        ))
+      ) : (
+        <p>No matches available.</p>
+      )}
     </div>
   );
 };
