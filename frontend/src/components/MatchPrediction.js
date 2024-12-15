@@ -56,8 +56,10 @@ const MatchPrediction = () => {
       {filteredMatches && filteredMatches.length > 0 ? (
         filteredMatches.map((match, index) => (
           <div key={index} className='match-card'>
-            <h2>{match.competition.name}</h2>
-            <p>{new Date(match.utcDate).toLocaleString()}</p>
+            <div className='match-header'>
+              <h2 className=''>{match.competition.name}</h2>
+              <p>{new Date(match.utcDate).toLocaleString()}</p>
+            </div>
             <div className='match-content'>
               <div className='team home'>
                 <span className='team-name'>{match.homeTeam.name}</span>

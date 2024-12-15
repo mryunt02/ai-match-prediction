@@ -10,13 +10,15 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .filter-buttons {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+}
+h2 {
+  margin: 0;
 }
 
 .filter-buttons button {
@@ -39,13 +41,18 @@ h1 {
   flex-direction: column;
   gap: 15px;
 }
+.match-header {
+  text-align: center;
+}
 
 .match-card {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
   color: white;
   padding: 20px;
+  padding-bottom: 32px;
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 12px;
 }
 
 .match-header {
