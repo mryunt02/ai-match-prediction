@@ -1,0 +1,14 @@
+.match-prediction {
+  font-family: 'Rubik', sans-serif;
+}
+.match-info {
+  font-family: 'Staatliches', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-card h2 {
+  font-family: 'Rubik Mono One', sans-serif;
+  font-size: 36px;
+}
