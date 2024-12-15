@@ -136,3 +136,9 @@ h2 {
 .match-footer {
   margin-top: 10px;
 }
+
+.prediction {
+  margin-top: 10px;
+  font-style: italic;
+  color: #ffeaea;
+}

@@ -1,20 +1,43 @@
+// MatchPrediction.js
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import './MatchPrediction.css'; // Import CSS file for styling
+import './MatchPrediction.css';
 
 const fetchMatchesFromBackend = async () => {
-  const response = await axios.get('http://localhost:3001/matches'); // Fetch matches from the backend
-  return response.data; // Return matches data
+  const response = await axios.get('http://localhost:3001/matches');
+  return response.data;
+};
+
+const fetchPrediction = async (homeTeam, awayTeam) => {
+  const response = await axios.post('http://localhost:3001/prediction', {
+    homeTeam,
+    awayTeam,
+  });
+  return response.data.prediction;
 };
 
 const MatchPrediction = () => {
   const [filter, setFilter] = useState('all');
+  const [predictions, setPredictions] = useState({});
+
   const {
     data: matches,
     isLoading,
     isError,
   } = useQuery('matches', fetchMatchesFromBackend);
+
+  const handleGetPrediction = async (homeTeam, awayTeam, matchId) => {
+    try {
+      const prediction = await fetchPrediction(homeTeam, awayTeam);
+      setPredictions((prevPredictions) => ({
+        ...prevPredictions,
+        [matchId]: prediction,
+      }));
+    } catch (error) {
+      console.error('Error fetching prediction:', error);
+    }
+  };
 
   const filteredMatches = matches?.filter((match) => {
     if (filter === 'all') return true;
@@ -54,10 +77,10 @@ const MatchPrediction = () => {
         </button>
       </div>
       {filteredMatches && filteredMatches.length > 0 ? (
-        filteredMatches.map((match, index) => (
-          <div key={index} className='match-card'>
+        filteredMatches.map((match) => (
+          <div key={match.id} className='match-card'>
             <div className='match-header'>
-              <h2 className=''>{match.competition.name}</h2>
+              <h2>{match.competition.name}</h2>
               <p>{new Date(match.utcDate).toLocaleString()}</p>
             </div>
             <div className='match-content'>
@@ -69,14 +92,26 @@ const MatchPrediction = () => {
                   className='team-logo'
                 />
               </div>
-
               <div className='score-container'>
                 <div className='score'>
                   {match.score.fullTime.home} - {match.score.fullTime.away}
                 </div>
                 <div className='match-status'>{match.status}</div>
+                <div className='prediction'>
+                  Prediction: {predictions[match.id] || 'Not available'}
+                </div>
+                <button
+                  onClick={() =>
+                    handleGetPrediction(
+                      match.homeTeam.name,
+                      match.awayTeam.name,
+                      match.id
+                    )
+                  }
+                >
+                  Get Prediction
+                </button>
               </div>
-
               <div className='team away'>
                 <img
                   src={match.awayTeam.crest}
