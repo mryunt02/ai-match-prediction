@@ -100,17 +100,19 @@ const MatchPrediction = () => {
                 <div className='prediction'>
                   Prediction: {predictions[match.id] || 'Not available'}
                 </div>
-                <button
-                  onClick={() =>
-                    handleGetPrediction(
-                      match.homeTeam.name,
-                      match.awayTeam.name,
-                      match.id
-                    )
-                  }
-                >
-                  Get Prediction
-                </button>
+                {match.status !== 'FINISHED' && (
+                  <button
+                    onClick={() =>
+                      handleGetPrediction(
+                        match.homeTeam.name,
+                        match.awayTeam.name,
+                        match.id
+                      )
+                    }
+                  >
+                    Get Prediction
+                  </button>
+                )}
               </div>
               <div className='team away'>
                 <img

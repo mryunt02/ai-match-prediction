@@ -13,7 +13,7 @@ const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
  * @returns {string} - Prediction result (e.g., Team 1 wins, Team 2 wins, Draw)
  */
 const getMatchPrediction = async (team1, team2) => {
-  const prompt = `Who do you think will win the match between ${team1} and ${team2}? Choose from the following options: ${team1} win, ${team2} win, draw.`;
+  const prompt = `Who do you think will win the match between ${team1} and ${team2}? Choose from the following options: ${team1} win, ${team2} win, draw. You should consider the current form of both teams, their head-to-head record, and other factors. Give me your prediction. ${team1} win, ${team2} win, or draw? just give me your prediction. Just say ${team1} win, ${team2} win, or draw. After give the prediction, add some context to support your prediction.`;
 
   try {
     const result = await model.generateContent(prompt);
