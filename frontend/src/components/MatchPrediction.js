@@ -1,19 +1,23 @@
-// MatchPrediction.js
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import './MatchPrediction.css';
 
 const fetchMatchesFromBackend = async () => {
-  const response = await axios.get('http://localhost:3001/matches');
+  const response = await axios.get(
+    'https://ai-match-prediction.onrender.com/matches'
+  );
   return response.data;
 };
 
 const fetchPrediction = async (homeTeam, awayTeam) => {
-  const response = await axios.post('http://localhost:3001/prediction', {
-    homeTeam,
-    awayTeam,
-  });
+  const response = await axios.post(
+    'https://ai-match-prediction.onrender.com/prediction',
+    {
+      homeTeam,
+      awayTeam,
+    }
+  );
   return response.data.prediction;
 };
 
@@ -102,6 +106,7 @@ const MatchPrediction = () => {
                 </div>
                 {match.status !== 'FINISHED' && (
                   <button
+                    className='prediction-button'
                     onClick={() =>
                       handleGetPrediction(
                         match.homeTeam.name,

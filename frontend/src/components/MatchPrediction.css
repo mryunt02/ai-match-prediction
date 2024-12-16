@@ -2,6 +2,7 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
 .match-prediction {
   background-color: #1a1a1a;
   color: white;
@@ -16,13 +17,11 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-}
-h2 {
-  margin: 0;
+  flex-wrap: wrap;
 }
 
 .filter-buttons button {
-  margin: 0 10px;
+  margin: 10px;
   padding: 10px 15px;
   border: none;
   background-color: #333;
@@ -41,9 +40,6 @@ h2 {
   flex-direction: column;
   gap: 15px;
 }
-.match-header {
-  text-align: center;
-}
 
 .match-card {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
@@ -53,6 +49,7 @@ h2 {
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 12px;
+  border-radius: 8px;
 }
 
 .match-header {
@@ -79,6 +76,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .team {
@@ -141,4 +139,68 @@ h2 {
   margin-top: 10px;
   font-style: italic;
   color: #ffeaea;
+}
+
+.prediction-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.prediction-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .match-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .score-container {
+    margin: 20px 0;
+  }
+
+  .team-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .team-name {
+    font-size: 24px;
+  }
+
+  .score {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+  }
+
+  .team-name {
+    font-size: 20px;
+  }
+
+  .score {
+    font-size: 24px;
+  }
+
+  .team-logo {
+    width: 30px;
+    height: 30px;
+  }
 }
